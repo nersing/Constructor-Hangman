@@ -3,17 +3,17 @@
 
 function Hangmanletter (letter){
 	this.letter = letter; 
-	this.wrongLetter = false;
+	this.guessed = false;
 	this.showLetter = function (){
-		if(this.wrongLetter === false){
-			return ' _ ';
+		if(this.guessed === false){
+			return '_';
 		}else{
 			return this.letter
 		}
 	}
 }
 
-Hangmanletter()
+
 
 //testing to make sure constructor is working
 // var l1 = new Hangmanletter("L", true)

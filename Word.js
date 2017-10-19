@@ -1,64 +1,46 @@
 //require the letter.js file
 var Hangmanletter = require ("./Hangmanletter.js");
-var choices = ['snoopy', 'lucy']
 
 
-var Word = function(word){
-	this.word = word;
-	this.choices = ['snoopy', 'lucy']
-	this.letters = [];
-	this.inWord = false;
+var Word = function(){
+	this.choices = ['snoopy', 'lucy', 'linus', 'woodstock'];
 
+	this.randomWord = this.choices[Math.floor(Math.random()*this.choices.length)];
 
-	this.wordChosen = function(){
-		var randomWord = choices[Math.floor(Math.random()*choices.length)];
-		var spaceWord = "";
-		for(var i = 0; i < randomWord.length; i++){
-			spaceWord += ' _ ';
-		}
-		console.log(spaceWord)
-
+ 	for(var i = 0; i < this.randomWord.length; i++){
+		this[i] = new Hangmanletter(this.randomWord[i]);
 	}
 
-		//grabs letters, loops through them, and pushes them into the letter array
-		this.grabLetters = function(){
-			 	for(var i = 0; i < word.length; i++){
-			       this.letters.push(new Hangmanletter(word[i]))
-			     
-		}
-		  
-	};
+	//grabs letters, loops through them, and pushes them into the letter array
+	this.showWord = function(){
+		this.displayWord = []
+		 for(var i = 0; i < this.randomWord.length; i++){
+		  this.displayWord.push(this[i].showLetter())
+		 }
+		 console.log(this.displayWord.join(' '))
 
+	};
 
 	//checks to see if the letter the user selected is found in the selected word
 	this.letterChecker = function(userinput){
-		for(var i = 0; i < userinput.length; i++)
-		if(this.letters[i] === userinput){
-			this.letters[i].wrongLetter = true;
-		 } 
+		if(this.randomWord.includes(userinput)){
+			for(var i = 0; i < this.randomWord.length; i++){
+				if(userinput === this[i].letter){
+					this[i].guessed = true;
+					
+				}
+			}
+		}
 	}; //letterChecker
 
-	// puts the word and letts in the terminal window if guessed
-	this.showWord = function(){
-		var stringWord = ' '
-		for(var i = 0; i < this.letters.length; i++){
-			stringWord += this.letters[i].showLetter();
+
+	this.ifGameOver = function(){
+		if(this.displayWord.includes('_')){
+				this.gameOver = false;
+		}else{
+			this.gameOver = true;
 		}
-		return stringWord;
-	}; //showWord
-
-
-
-	//looks at the boolean(.inWord) 
-	// this.wordFound = function(){
-	// 	this.inWord = this.letters.every(function(chosenLetter){
-	// 		return chosenLetter.wrongLetter;
-	// 	});
-	// 		return this.inWord;	
-
-	// console.log(this.inWord)
-// }; //wordFunction
-
+	}
 
 };  //Word constructor  
 
