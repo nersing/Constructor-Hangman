@@ -1,6 +1,6 @@
 # Constructor-Hangman
 
-Constructor Hangman is a command-line game using constructor functions.
+Constructor Hangman is a command-line game that uses constructor functions.
 
 In order to play, follow these steps:
 1. git clone the respository 
